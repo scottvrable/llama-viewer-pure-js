@@ -1,6 +1,10 @@
+html {
+	height: 100%;
+}
 body {
 	background: $backdrop-color;
 	font-family: $body-font;
+	height: 100%;
 	@include antialiased();
 }
 .warning {
@@ -14,6 +18,23 @@ body {
 	}
 	.js & {
 		display: none;
+	}
+}
+.loading-bg {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	z-index: -100;
+	.loading-gif {
+		display: inline-block;
+		height: 40px;
+		margin-top: -20px;
+		position: absolute;
+		top: 50%;
+		width: 40px;
 	}
 }
 .container {

@@ -32,7 +32,7 @@ gulp.task("uglify", function() {
 });
 
 gulp.task("clean", function() {
-   return del(["build", "build/css", "build/js"]);
+   return del(["build/*.html", "build/css", "build/js"]);
 });
 
 gulp.task("default", ["clean"], function() {
