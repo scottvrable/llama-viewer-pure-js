@@ -1,0 +1,17 @@
+body {
+	background: $backdrop-color;
+	font-family: $body-font;
+}
+.warning {
+	background: $warning-color;
+	@include stylized-shadow(darken($warning-color, 20%), 3px);
+	p {
+		color: #fff;
+		margin: 0;
+		padding: 0.3em 0.5em;
+		text-align: center;
+	}
+	.js & {
+		display: none;
+	}
+}

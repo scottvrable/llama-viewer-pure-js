@@ -1,0 +1,3 @@
+@mixin stylized-shadow($color, $width) {
+	border-bottom: $color $width solid;
+}
