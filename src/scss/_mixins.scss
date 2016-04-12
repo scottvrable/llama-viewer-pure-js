@@ -1,3 +1,9 @@
 @mixin stylized-shadow($color, $width) {
 	border-bottom: $color $width solid;
 }
+@mixin antialiased {
+	-webkit-font-smoothing: antialiased;
+}
+@mixin rounded($radii...) {
+	border-radius: $radii;
+}

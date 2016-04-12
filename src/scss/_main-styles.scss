@@ -1,6 +1,7 @@
 body {
 	background: $backdrop-color;
 	font-family: $body-font;
+	@include antialiased();
 }
 .warning {
 	background: $warning-color;
@@ -13,5 +14,72 @@ body {
 	}
 	.js & {
 		display: none;
+	}
+}
+.container {
+	margin: auto;
+	max-width: 1200px;
+	padding: 20px;
+}
+header {
+	background: $primary-dark-color;
+	@include stylized-shadow(#000, 3px);
+	h1 {
+		color: #fff;
+		font-family: $display-font;
+		font-size: 1rem;
+		margin: 0;
+		text-align: center;
+		@media #{$media-large} {
+			font-size: 1.4rem;
+		}
+		.featured-animal {
+			border-bottom: solid 3px $warning-color;
+			color: $warning-color;
+			display: inline-block;
+			font-size: 1.4em;
+			text-transform: uppercase;
+			vertical-align: middle;
+		}
+	}
+	.show-more-container {
+		font-size: 1rem;
+		margin-top: 15px;
+		text-align: center;
+		@media #{$media-large} {
+			float: right;
+		}
+		button {
+			background: $action-color;
+			border: 0;
+			color: #fff;
+			font-size: 0.9rem;
+			outline: 0;
+			padding: 0.6em 0.8em;
+			transition: all 0.2s;
+			@include rounded(4px);
+			@include stylized-shadow(darken($action-color, 20%), 3px);
+			&:hover {
+				background: darken($action-color, 20%);
+				@include stylized-shadow(darken($action-color, 30%), 3px);
+			}
+			&[disabled] {
+				background: $disabled-color;
+				cursor: not-allowed;
+				opacity: 0.6;
+				@include stylized-shadow(darken($disabled-color, 20%), 3px);
+			}
+			@media #{$media-large} {
+				margin-top: 4px;
+			}
+		}
+	}
+	.heading-container,
+	.show-more-container {
+		@media #{$media-large} {
+			display: inline-block;
+			margin-top: 0;
+			vertical-align: middle;
+		}
 	}
 }

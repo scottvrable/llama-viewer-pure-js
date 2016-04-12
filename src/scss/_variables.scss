@@ -1,4 +1,12 @@
+$display-font: "Bevan", cursive;
 $body-font: "Varela Round", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $backdrop-color: #e5e5e5;
 $warning-color: #ea4d4d;
+$action-color: #409fed;
+$primary-dark-color: #333;
+$disabled-color: #999;
+
+$media-medium: "only screen and (min-width: 600px)";
+$media-large: "only screen and (min-width: 900px)";
+$media-xl: "only screen and (min-width: 1200px)";
