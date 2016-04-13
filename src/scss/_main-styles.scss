@@ -106,5 +106,45 @@ header {
 .viewing-area {
 	.image-display {
 		padding: 20px;
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			margin-right: -2.5%;
+		}
+		li {
+			display: inline-block;
+			margin-bottom: 2.5%;
+			margin-right: 2.5%;
+			text-align: center;
+			width: 47.5%;
+			@media #{$media-medium} {
+				width: 30.8%;
+			}
+			@media #{$media-large} {
+				width: 17.5%;
+			}
+			@media #{$media-xl} {
+				width: 14.1%;
+			}
+		}
+		.photo-frame {
+			background: #fff;
+			box-sizing: border-box;
+			cursor: pointer;
+			display: inline-block;
+			outline: solid 1px $soft-color;
+			max-width: 170px;
+			padding: 10px;
+			transition: all 0.2s;
+			&:hover {
+				transform: scale(1.1);
+			}
+			img {
+				height: auto;
+				width: 100%;
+				@include rounded(4px);
+			}
+		}
 	}
 }

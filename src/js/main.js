@@ -87,7 +87,7 @@
 		getJSON: function() {
 			showLoader();
 			var queryScript = document.createElement("script");
-			var src = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + this.api_key + "&tags=" + this.animal + "&format=json&content_type=1&per_page=20safe_search=1&page=" + this.pageNum + "&jsoncallback=getPhotos";
+			var src = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + this.api_key + "&tags=" + this.animal + "&format=json&content_type=1&per_page=24&safe_search=1&page=" + this.pageNum + "&jsoncallback=getPhotos";
 			queryScript.src = src;
 			queryScript.id = "flickrScript";
 			document.body.appendChild(queryScript);
