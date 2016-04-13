@@ -27,7 +27,7 @@ gulp.task("sass", function () {
 
 gulp.task("uglify", function() {
   return gulp.src("src/js/*.js")
-    .pipe(uglify())
+    .pipe(uglify({mangle: false}))
     .pipe(gulp.dest("build/js"));
 });
 
