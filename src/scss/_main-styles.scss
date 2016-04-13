@@ -1,10 +1,6 @@
-html {
-	height: 100%;
-}
 body {
 	background: $backdrop-color;
 	font-family: $body-font;
-	height: 100%;
 	@include antialiased();
 }
 .warning {
@@ -29,12 +25,15 @@ body {
 	top: 0;
 	z-index: -100;
 	.loading-gif {
+		background-color: rgba(255,255,255, 0.6);
 		display: inline-block;
 		height: 40px;
-		margin-top: -20px;
+		margin-top: -30px;
+		padding: 10px;
 		position: absolute;
 		top: 50%;
 		width: 40px;
+		@include rounded(6px);
 	}
 }
 .container {
