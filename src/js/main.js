@@ -3,10 +3,10 @@
 	document.documentElement.className = document.documentElement.className.replace("no-js", "js");
 
 	// grabbing some elements
-	var showMoreBtn = document.getElementById("show-more");
+	var Loader      = new createLoader(),
+	    showMoreBtn = document.getElementById("show-more");
 
 	// set up loading graphic
-	var Loader = new createLoader();
 	function createLoader() {
 		var loadingBG = document.createElement("div");
 		var loadingGIF = new Image;
@@ -18,14 +18,19 @@
 		return loadingBG;
 	}
 
+	// show or hide Loader functions
 	function showLoader() {
 		showMoreBtn.setAttribute("disabled", "disabled");
 		document.body.appendChild(Loader);
 	}
+	function removeLoader() {
+		showMoreBtn.removeAttribute("disabled");
+		document.body.removeChild(Loader);
+	}
 
 	function initialPageLoad() {
 		document.onreadystatechange = function() {
-			if(document.readyState === "complete") {
+			if(document.readyState === "interactive") {
 				showLoader();
 			}
 		}
