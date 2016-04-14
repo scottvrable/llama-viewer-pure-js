@@ -5,7 +5,8 @@
 	// creating some elements
 	var Loader         = createLoader(),
 	    selectedAnimal = "llama",
-	    bigPhotoList   = null;
+	    bigPhotoList   = null,
+	    lightboxBG     = createLightboxBG();
 
 	// grabbing some elements
 	var showMoreBtn = document.getElementById("show-more"),
@@ -35,6 +36,17 @@
 		}, 500);
 	}
 
+	function createLightboxBG() {
+		var lightboxBG = document.createElement("div");
+		lightboxBG.id = "lightbox-bg";
+		lightboxBG.className = "lightbox-bg";
+		return lightboxBG;
+	}
+	function showLightbox() {
+		document.body.appendChild(lightboxBG);
+		lightboxBG.className = "lightbox-bg show";
+	}
+
 	// load initial llama pictures
 	function initialPageLoad() {
 		document.onreadystatechange = function() {
@@ -48,6 +60,9 @@
 	function attachImageLoadListener(image) {
 		var fadeInImage = function() {
 			this.parentNode.parentNode.className = "show";
+			this.parentNode.addEventListener("click", function() {
+				showLightbox();
+			});
 			image.removeEventListener("load", fadeInImage);
 		}
 		image.addEventListener("load", fadeInImage);
