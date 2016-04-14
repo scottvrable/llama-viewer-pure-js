@@ -4,7 +4,8 @@
 
 	// creating some elements
 	var Loader         = createLoader(),
-	    selectedAnimal = "llama";
+	    selectedAnimal = "llama",
+	    bigPhotoList   = null;
 
 	// grabbing some elements
 	var showMoreBtn = document.getElementById("show-more"),
@@ -58,7 +59,7 @@
 		var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + sizeCharacter + ".jpg";
 		return url;
 	}
-	function buildPhoto(photo) {
+	function buildPhoto(photo, index) {
 		var li = document.createElement("li");
 		var frame = document.createElement("div");
 		var thumbnail = document.createElement("img");
@@ -66,7 +67,7 @@
 		thumbnail.className = "thumbnail";
 		thumbnail.src = buildPhotoUrl(photo, true);
 		thumbnail.alt = photo.title;
-		thumbnail.setAttribute("data-photosrc", buildPhotoUrl(photo, false));
+		thumbnail.setAttribute("data-index", index);
 		attachImageLoadListener(thumbnail);
 		frame.appendChild(thumbnail);
 		li.appendChild(frame);
@@ -76,7 +77,11 @@
 		var ul = document.createElement("ul");
 		ul.id = "photo-list";
 		for(var i = 0; i < photos.length; i++) {
-			ul.appendChild(buildPhoto(photos[i]));
+			ul.appendChild(buildPhoto(photos[i], i));
+			bigPhotoList.push({
+				url: buildPhotoUrl(photos[i], false),
+				title: photos[i].title
+			});
 		}
 		imageDisplay.appendChild(ul);
 	}
@@ -104,6 +109,7 @@
 			this.animal = animal;
 			this.pageNum = pageNum;
 			window.getPhotos = this.getPhotos;
+			bigPhotoList = [];
 			this.getJSON();
 		},
 		getJSON: function() {
@@ -135,6 +141,7 @@
 				errorPara.parentNode.className = "warning show";
 			}
 			removeLoader();
+			console.log(bigPhotoList);
 		}
 	};
 
