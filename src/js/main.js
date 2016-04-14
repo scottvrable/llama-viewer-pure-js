@@ -1,6 +1,6 @@
 (function() {
 	// remove no JS warning
-	document.documentElement.className = document.documentElement.className.replace("no-js", "js");
+	document.documentElement.className = "js";
 
 	// creating some elements
 	var Loader         = createLoader(),
@@ -113,9 +113,15 @@
 			imageDisplay.innerHTML = "";
 		},
 		getPhotos: function(data) {
-			var photoArray = data.photos.photo;
-			buildGallery(photoArray);
-			removeLoader();
+			if(data.stat === "ok") {
+				var photoArray = data.photos.photo;
+				buildGallery(photoArray);
+				removeLoader();
+			} else {
+				document.querySelector(".warning p").innerHTML = "Sorry, something went wrong. Please try again later.";
+				document.querySelector(".warning").className = "warning show";
+				removeLoader();
+			}
 		}
 	};
 

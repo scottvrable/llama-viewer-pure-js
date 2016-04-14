@@ -5,7 +5,6 @@ body {
 }
 .warning {
 	background: $warning-color;
-	@include stylized-shadow(darken($warning-color, 20%), 3px);
 	p {
 		color: #fff;
 		margin: 0;
@@ -14,6 +13,9 @@ body {
 	}
 	.js & {
 		display: none;
+		&.show {
+			display: block;
+		}
 	}
 }
 .loading-bg {
