@@ -118,8 +118,9 @@
 				buildGallery(photoArray);
 				removeLoader();
 			} else {
-				document.querySelector(".warning p").innerHTML = "Sorry, something went wrong. Please try again later.";
-				document.querySelector(".warning").className = "warning show";
+				var errorPara = document.querySelector(".warning p");
+				errorPara.innerHTML = "Sorry, something went wrong. Please try again later.";
+				errorPara.parentNode.className = "warning show";
 				removeLoader();
 			}
 		}
