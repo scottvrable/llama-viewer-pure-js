@@ -85,7 +85,7 @@ header {
 				background: darken($action-color, 20%);
 				@include stylized-shadow(darken($action-color, 30%), 3px);
 			}
-			&[disabled] {
+			&[disabled="true"] {
 				background: $disabled-color;
 				cursor: not-allowed;
 				opacity: 0.6;

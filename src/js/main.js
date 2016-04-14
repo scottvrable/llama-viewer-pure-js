@@ -24,12 +24,14 @@
 
 	// show or hide Loader functions
 	function showLoader() {
-		showMoreBtn.setAttribute("disabled", "disabled");
+		showMoreBtn.setAttribute("disabled", "true");
 		document.body.appendChild(Loader);
 	}
 	function removeLoader() {
-		showMoreBtn.removeAttribute("disabled");
 		document.body.removeChild(Loader);
+		setTimeout(function() {
+			showMoreBtn.removeAttribute("disabled");
+		}, 500);
 	}
 
 	// load initial llama pictures
@@ -84,7 +86,7 @@
 	}
 
 	// show more button functionality
-	showMoreBtn.addEventListener("click", function() {
+	showMoreBtn.addEventListener("click", function(e) {
 		var numOfPages = Number(showMoreBtn.getAttribute("data-pages"));
 		var randomPageNum = (numOfPages > 1) ? selectRandomNum(showMoreBtn.getAttribute("data-pages")) : 1;
 		var flickrQuery = new Flickr(selectedAnimal, randomPageNum);
