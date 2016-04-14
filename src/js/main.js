@@ -42,11 +42,28 @@
 		lightboxBG.className = "lightbox-bg";
 		return lightboxBG;
 	}
-	function showLightbox() {
+	function showLightbox(photoIndex) {
+		var featuredImage = createLightboxImage(photoIndex);
+		lightboxBG.appendChild(featuredImage);
 		document.body.appendChild(lightboxBG);
 		setTimeout(function() {
 			lightboxBG.className = "lightbox-bg show";
 		}, 100);
+	}
+	function createLightboxImage(photoIndex) {
+		var photoFrame = document.createElement("div");
+		var featuredPhoto = new Image();
+		var photoObject = bigPhotoList[photoIndex];
+		var captionHolder = document.createElement("h2");
+		var caption = document.createTextNode(photoObject.title);
+		featuredPhoto.alt = photoObject.title;
+		featuredPhoto.src = photoObject.url;
+		featuredPhoto.id = featuredPhoto.className = "featured-photo";
+		photoFrame.className = "photo-frame";
+		captionHolder.appendChild(caption);
+		photoFrame.appendChild(featuredPhoto);
+		photoFrame.appendChild(captionHolder);
+		return photoFrame;
 	}
 
 	// load initial llama pictures
@@ -63,7 +80,7 @@
 		var fadeInImage = function() {
 			this.parentNode.parentNode.className = "show";
 			this.parentNode.addEventListener("click", function() {
-				showLightbox();
+				showLightbox(image.getAttribute("data-index"));
 			});
 			image.removeEventListener("load", fadeInImage);
 		}
