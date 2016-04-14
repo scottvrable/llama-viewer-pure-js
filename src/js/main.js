@@ -44,7 +44,9 @@
 	}
 	function showLightbox() {
 		document.body.appendChild(lightboxBG);
-		lightboxBG.className = "lightbox-bg show";
+		setTimeout(function() {
+			lightboxBG.className = "lightbox-bg show";
+		}, 100);
 	}
 
 	// load initial llama pictures
