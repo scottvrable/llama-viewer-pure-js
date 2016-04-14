@@ -44,6 +44,12 @@
 	}
 
 	// construct image frames
+	// transition images in
+	function attachImageLoadListener(image) {
+		image.onload = function() {
+			this.parentNode.parentNode.className = "show";
+		}
+	}
 	function buildPhotoUrl(photo, thumbnail) {
 		var sizeCharacter = thumbnail ? "_q" : "";
 		var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + sizeCharacter + ".jpg";
@@ -58,6 +64,7 @@
 		thumbnail.src = buildPhotoUrl(photo, true);
 		thumbnail.alt = photo.title;
 		thumbnail.setAttribute("data-photosrc", buildPhotoUrl(photo, false));
+		attachImageLoadListener(thumbnail);
 		frame.appendChild(thumbnail);
 		li.appendChild(frame);
 		return li;
@@ -78,9 +85,10 @@
 	Flickr.prototype = {
 		initialize: function(animal, pageNum) {
 			this.removePreviousScript();
+			this.clearViewer();
 			this.api_key = "9874b5ae39cf7e7517ccaa37d29c262a";
 			this.animal = animal;
-			this.pageNum = pageNum ? pageNum : 1;
+			this.pageNum = pageNum;
 			window.getPhotos = this.getPhotos;
 			this.getJSON();
 		},
@@ -93,11 +101,13 @@
 			document.body.appendChild(queryScript);
 		},
 		removePreviousScript: function() {
-			if(document.getElementById("flickrScript")) {
-				console.log(typeof document.getElementById("flickrScript"));
-			} else {
-				"No script to remove";
+			var oldScript = document.getElementById("flickrScript");
+			if(oldScript) {
+				document.body.removeChild(oldScript);
 			}
+		},
+		clearViewer: function() {
+			imageDisplay.innerHTML = "";
 		},
 		getPhotos: function(data) {
 			var photoArray = data.photos.photo;
