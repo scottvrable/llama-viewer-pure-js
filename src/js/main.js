@@ -4,9 +4,7 @@
 
 	// creating some elements
 	var Loader         = createLoader(),
-	    availablePages = null,
-	    selectedAnimal = "llama",
-	    previousAnimal = null;
+	    selectedAnimal = "llama";
 
 	// grabbing some elements
 	var showMoreBtn = document.getElementById("show-more"),
@@ -38,7 +36,7 @@
 	function initialPageLoad() {
 		document.onreadystatechange = function() {
 			if(document.readyState === "interactive") {
-				var flickrFeed = new Flickr("llama");
+				var flickrQuery = new Flickr("llama", 1);
 			}
 		}
 	}
@@ -81,6 +79,17 @@
 		imageDisplay.appendChild(ul);
 	}
 
+	function selectRandomNum(topNum) {
+		return Math.ceil(Math.random() * topNum);
+	}
+
+	// show more button functionality
+	showMoreBtn.addEventListener("click", function() {
+		var numOfPages = Number(showMoreBtn.getAttribute("data-pages"));
+		var randomPageNum = (numOfPages > 1) ? selectRandomNum(showMoreBtn.getAttribute("data-pages")) : 1;
+		var flickrQuery = new Flickr(selectedAnimal, randomPageNum);
+	});
+
 	// Flickr query setup
 	function Flickr(animal, pageNum) {
 		this.initialize(animal, pageNum);
@@ -98,7 +107,7 @@
 		getJSON: function() {
 			showLoader();
 			var queryScript = document.createElement("script");
-			var src = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + this.api_key + "&tags=" + this.animal + "&format=json&content_type=1&per_page=24&safe_search=1&page=" + this.pageNum + "&jsoncallback=getPhotos";
+			var src = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=" + this.api_key + "&tags=" + this.animal + "&format=json&sort=relevance&content_type=1&per_page=24&safe_search=1&page=" + this.pageNum + "&jsoncallback=getPhotos";
 			queryScript.src = src;
 			queryScript.id = "flickrScript";
 			document.body.appendChild(queryScript);
@@ -114,15 +123,16 @@
 		},
 		getPhotos: function(data) {
 			if(data.stat === "ok") {
-				var photoArray = data.photos.photo;
-				buildGallery(photoArray);
-				removeLoader();
+				console.log(data);
+				var photoWrapper = data.photos;
+				buildGallery(photoWrapper.photo);
+				showMoreBtn.setAttribute("data-pages", photoWrapper.pages < 40 ? photoWrapper.page : 40);
 			} else {
 				var errorPara = document.querySelector(".warning p");
 				errorPara.innerHTML = "Sorry, something went wrong. Please try again later.";
 				errorPara.parentNode.className = "warning show";
-				removeLoader();
 			}
+			removeLoader();
 		}
 	};
 
