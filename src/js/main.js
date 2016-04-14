@@ -43,13 +43,16 @@
 		}
 	}
 
-	// construct image frames
 	// transition images in
 	function attachImageLoadListener(image) {
-		image.onload = function() {
+		var fadeInImage = function() {
 			this.parentNode.parentNode.className = "show";
+			image.removeEventListener("load", fadeInImage);
 		}
+		image.addEventListener("load", fadeInImage);
 	}
+
+	// construct image frames
 	function buildPhotoUrl(photo, thumbnail) {
 		var sizeCharacter = thumbnail ? "_q" : "";
 		var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + sizeCharacter + ".jpg";
