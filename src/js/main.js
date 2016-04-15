@@ -15,7 +15,10 @@
 	  	imageDisplay  = document.getElementById("image-display"),
 	   	fakeCell      = lightboxBG.querySelector("#fake-cell"),
 	   	photoFrame    = lightboxBG.querySelector("#photo-frame"),
-	   	captionHolder = lightboxBG.querySelector("h2");
+	   	captionHolder = lightboxBG.querySelector("h2"),
+	   	closeButton   = lightboxBG.querySelector("#close-button"),
+	   	backButton    = lightboxBG.querySelector("#back-button"),
+	   	forwardButton = lightboxBG.querySelector("#forward-button");
 
 	// set up loading graphic
 	function createLoader() {
@@ -55,18 +58,29 @@
 		var fakeCell         = document.createElement("div");
 		var photoFrame       = document.createElement("div");
 		var captionHolder    = document.createElement("h2");
+		var closeButton      = document.createElement("div");
+		var backButton       = document.createElement("div");
+		var forwardButton    = document.createElement("div");
+		var sprite           = new Image();
 		lightboxBG.id        = "lightbox-bg";
 		lightboxBG.className = "lightbox-bg";
 		fakeTable.className  = "fake-table";
 		fakeRow.className    = "fake-row";
 		fakeCell.className   = "fake-cell";
 		fakeCell.id          = "fake-cell";
+		sprite.src           = "img/button-sprite.png";
+		closeButton.id       = closeButton.className = "close-button";
+		backButton.id        = backButton.className = "back-button";
+		forwardButton.id     = forwardButton.className = "forward-button";
 		photoFrame.className = photoFrame.id = "photo-frame";
 		photoFrame.appendChild(captionHolder);
 		fakeCell.appendChild(photoFrame);
 		fakeRow.appendChild(fakeCell);
 		fakeTable.appendChild(fakeRow);
 		lightboxBG.appendChild(fakeTable);
+		lightboxBG.appendChild(closeButton);
+		lightboxBG.appendChild(backButton);
+		lightboxBG.appendChild(forwardButton);
 		return lightboxBG;
 	}
 	function showLightbox(photoIndex) {

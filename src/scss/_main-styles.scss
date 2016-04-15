@@ -209,12 +209,12 @@ header {
 			position: absolute;
 			right: 0;
 			text-align: left;
-			// text-overflow: ellipsis;
-			// white-space: nowrap;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 			@media #{$media-medium} {
 				font-size: 16px;
 				padding: 5px 10px;
-				// white-space: normal;
+				white-space: normal;
 			}
 		}
 	}
@@ -223,5 +223,50 @@ header {
 		max-height: 100%;
 		max-width: 100%;
 		width: auto;
+	}
+	.close-button,
+	.back-button,
+	.forward-button {
+		background-image: url(../img/button-sprite.png);
+		background-repeat: no-repeat;
+		background-size: 132px 44px;
+		cursor: pointer;
+		opacity: 0.7;
+		position: fixed;
+		transition: all 0.2s;
+		width: 44px;
+		z-index: 100;
+		&:hover {
+			opacity: 1;
+		}
+	}
+	.close-button {
+		height: 44px;
+		top: 10px;
+		right: 10px;
+		@media #{$media-large} {
+			top: 20px;
+			right: 20px;
+		}
+	}
+	.back-button {
+		background-position: -44px center;
+		height: 200px;				
+		left: 10px;
+		margin-top: -100px;
+		top: 50%;
+		@media #{$media-large} {
+			left: 10%;
+		}
+	}
+	.forward-button {
+		background-position: -88px center;
+		height: 200px;		
+		margin-top: -100px;
+		right: 10px;
+		top: 50%;
+		@media #{$media-large} {
+			right: 10%;
+		}
 	}
 }
