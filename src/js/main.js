@@ -80,12 +80,13 @@
 		lightboxBG.appendChild(forwardButton);
 		closeButton.addEventListener("click", function() {
 			document.body.removeChild(lightboxBG);
+			photoFrame.className = "photo-frame";
 			clearLightbox();
 		});
 		return lightboxBG;
 	}
 	function showLightbox(photoIndex) {
-		var featuredImage = createLightboxImage(photoIndex);
+		displayPhoto = createLightboxImage(photoIndex);
 		setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
 		fakeCell.appendChild(photoFrame);
 		document.body.appendChild(lightboxBG);
@@ -93,19 +94,17 @@
 			lightboxBG.className = "lightbox-bg show";
 		}, 100);
 		showLoader();
-		fadeInDisplayImage(featuredImage);
 	}
 	function createLightboxImage(photoIndex) {
-		var featuredPhoto = new Image();
 		var photoObject   = bigPhotoList[photoIndex];
 		var caption       = document.createTextNode(photoObject.title);
-		featuredPhoto.alt = photoObject.title;
-		featuredPhoto.src = photoObject.url;
-		featuredPhoto.id  = featuredPhoto.className = "featured-photo";
-		photoFrame.appendChild(featuredPhoto);
+		displayPhoto.alt = photoObject.title;
+		displayPhoto.src = photoObject.url;
+		displayPhoto.id  = displayPhoto.className = "featured-photo";
+		photoFrame.appendChild(displayPhoto);
 		captionHolder.appendChild(caption);
-		displayPhoto      = featuredPhoto;
-		return featuredPhoto;
+		fadeInDisplayImage(displayPhoto);
+		return displayPhoto;
 	}
 	function setMaxSize(image, windowHeight, windowWidth) {
 		image.style.maxHeight = ((windowHeight - 30) + "px");
