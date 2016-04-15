@@ -31,9 +31,7 @@
 	}
 	function removeLoader() {
 		document.body.removeChild(Loader);
-		setTimeout(function() {
-			showMoreBtn.removeAttribute("disabled");
-		}, 500);
+		showMoreBtn.removeAttribute("disabled");
 	}
 
 	function createLightboxBG() {
