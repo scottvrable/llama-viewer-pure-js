@@ -6,14 +6,16 @@
 	var Loader         = createLoader(),
 	    selectedAnimal = "llama",
 	    bigPhotoList   = null,
-	    lightboxBG     = createLightboxBG()
+	    lightboxBG     = createLightboxFrame()
 	    displayPhoto   = null;
 
 	// grabbing some elements
-	var win   			 = window,
-			showMoreBtn  = document.getElementById("show-more"),
-	  	imageDisplay = document.getElementById("image-display"),
-	   	fakeCell     = lightboxBG.querySelector("#fake-cell");
+	var win   			  = window,
+			showMoreBtn   = document.getElementById("show-more"),
+	  	imageDisplay  = document.getElementById("image-display"),
+	   	fakeCell      = lightboxBG.querySelector("#fake-cell"),
+	   	photoFrame    = lightboxBG.querySelector("#photo-frame"),
+	   	captionHolder = lightboxBG.querySelector("h2");
 
 	// set up loading graphic
 	function createLoader() {
@@ -33,59 +35,75 @@
 		document.body.appendChild(Loader);
 	}
 	function removeLoader() {
-		document.body.removeChild(Loader);
-		showMoreBtn.removeAttribute("disabled");
+		if(document.getElementById("loading-bg")) {
+			document.body.removeChild(Loader);
+			showMoreBtn.removeAttribute("disabled");
+		}
 	}
 
 	function clearLightbox() {
-		fakeCell.innerHTML = "";
+		if(document.querySelector("#featured-photo")) {
+			photoFrame.removeChild(featuredPhoto);
+		}
+		captionHolder.innerHTML = "";
 	}
 
-	function createLightboxBG() {
+	function createLightboxFrame() {
 		var lightboxBG       = document.createElement("div");
 		var fakeTable        = document.createElement("div");
 		var fakeRow          = document.createElement("div");
 		var fakeCell         = document.createElement("div");
+		var photoFrame       = document.createElement("div");
+		var captionHolder    = document.createElement("h2");
 		lightboxBG.id        = "lightbox-bg";
 		lightboxBG.className = "lightbox-bg";
 		fakeTable.className  = "fake-table";
 		fakeRow.className    = "fake-row";
 		fakeCell.className   = "fake-cell";
 		fakeCell.id          = "fake-cell";
+		photoFrame.className = photoFrame.id = "photo-frame";
+		photoFrame.appendChild(captionHolder);
+		fakeCell.appendChild(photoFrame);
 		fakeRow.appendChild(fakeCell);
 		fakeTable.appendChild(fakeRow);
 		lightboxBG.appendChild(fakeTable);
 		return lightboxBG;
 	}
 	function showLightbox(photoIndex) {
-		var featuredImage = createLightboxImage(photoIndex);
 		clearLightbox();
+		var featuredImage = createLightboxImage(photoIndex);
 		setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
-		fakeCell.appendChild(featuredImage);
+		fakeCell.appendChild(photoFrame);
 		document.body.appendChild(lightboxBG);
 		setTimeout(function() {
 			lightboxBG.className = "lightbox-bg show";
 		}, 100);
+		showLoader();
+		fadeInDisplayImage(featuredImage);
 	}
 	function createLightboxImage(photoIndex) {
-		var photoFrame = document.createElement("div");
 		var featuredPhoto = new Image();
-		var photoObject = bigPhotoList[photoIndex];
-		var captionHolder = document.createElement("h2");
-		var caption = document.createTextNode(photoObject.title);
+		var photoObject   = bigPhotoList[photoIndex];
+		var caption       = document.createTextNode(photoObject.title);
 		featuredPhoto.alt = photoObject.title;
 		featuredPhoto.src = photoObject.url;
-		featuredPhoto.id = featuredPhoto.className = "featured-photo";
-		displayPhoto = featuredPhoto;
-		photoFrame.className = "photo-frame";
-		captionHolder.appendChild(caption);
+		featuredPhoto.id  = featuredPhoto.className = "featured-photo";
 		photoFrame.appendChild(featuredPhoto);
-		photoFrame.appendChild(captionHolder);
-		return photoFrame;
+		captionHolder.appendChild(caption);
+		displayPhoto      = featuredPhoto;
+		return featuredPhoto;
 	}
 	function setMaxSize(image, windowHeight, windowWidth) {
 		image.style.maxHeight = ((windowHeight - 30) + "px");
-		image.style.maxWidth = ((windowWidth - 30) + "px");
+		image.style.maxWidth  = ((windowWidth - 30) + "px");
+	}
+	function fadeInDisplayImage(image) {
+		var fadeIn = function() {
+			this.parentNode.className = "photo-frame show";
+			image.removeEventListener("load", fadeIn);
+			removeLoader();
+		}
+		image.addEventListener("load", fadeIn);
 	}
 	window.onresize = function() {
 		if(displayPhoto) {
