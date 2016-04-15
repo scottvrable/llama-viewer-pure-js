@@ -167,4 +167,56 @@ header {
 	&.show {
 		opacity: 1;
 	}
+	.fake-table {
+		display: table;
+		height: 100%;
+		max-width: 100%;
+		width: 100%;
+	}
+	.fake-row {
+		display: table-row;
+	}
+	.fake-cell {
+		display: table-cell;
+		height: 100%;
+		padding: 5px;
+		text-align: center;
+		vertical-align: middle;
+	}
+	.photo-frame {
+		box-sizing: border-box;
+		border: solid 10px #fff;
+		display: inline-block;
+		max-height: 100%;
+		max-width: 100%;
+		overflow: hidden;
+		position: relative;
+		h2 {
+			background: rgba(255,255,255, 0.6);
+			bottom: 0;
+			color: #000;
+			font-size: 14px;
+			left: 0;
+			margin: 0;
+			max-height: 25%;
+			overflow: hidden;
+			padding: 5px;
+			position: absolute;
+			right: 0;
+			text-align: left;
+			// text-overflow: ellipsis;
+			// white-space: nowrap;
+			@media #{$media-medium} {
+				font-size: 16px;
+				padding: 5px 10px;
+				// white-space: normal;
+			}
+		}
+	}
+	.featured-photo {
+		height: auto;
+		max-height: 100%;
+		max-width: 100%;
+		width: 100%;
+	}
 }

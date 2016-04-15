@@ -6,19 +6,22 @@
 	var Loader         = createLoader(),
 	    selectedAnimal = "llama",
 	    bigPhotoList   = null,
-	    lightboxBG     = createLightboxBG();
+	    lightboxBG     = createLightboxBG()
+	    displayPhoto   = null;
 
 	// grabbing some elements
-	var showMoreBtn = document.getElementById("show-more"),
-	   imageDisplay = document.getElementById("image-display");
+	var win   			 = window,
+			showMoreBtn  = document.getElementById("show-more"),
+	  	imageDisplay = document.getElementById("image-display"),
+	   	fakeCell     = lightboxBG.querySelector("#fake-cell");
 
 	// set up loading graphic
 	function createLoader() {
-		var loadingBG = document.createElement("div");
-		var loadingGIF = new Image;
-		loadingBG.id = "loading-bg";
-		loadingBG.className = "loading-bg";
-		loadingGIF.src = "img/loading-gif.gif";
+		var loadingBG        = document.createElement("div");
+		var loadingGIF       = new Image;
+		loadingBG.id         = "loading-bg";
+		loadingBG.className  = "loading-bg";
+		loadingGIF.src       = "img/loading-gif.gif";
 		loadingGIF.className = "loading-gif";
 		loadingBG.appendChild(loadingGIF);
 		return loadingBG;
@@ -34,15 +37,31 @@
 		showMoreBtn.removeAttribute("disabled");
 	}
 
+	function clearLightbox() {
+		fakeCell.innerHTML = "";
+	}
+
 	function createLightboxBG() {
-		var lightboxBG = document.createElement("div");
-		lightboxBG.id = "lightbox-bg";
+		var lightboxBG       = document.createElement("div");
+		var fakeTable        = document.createElement("div");
+		var fakeRow          = document.createElement("div");
+		var fakeCell         = document.createElement("div");
+		lightboxBG.id        = "lightbox-bg";
 		lightboxBG.className = "lightbox-bg";
+		fakeTable.className  = "fake-table";
+		fakeRow.className    = "fake-row";
+		fakeCell.className   = "fake-cell";
+		fakeCell.id          = "fake-cell";
+		fakeRow.appendChild(fakeCell);
+		fakeTable.appendChild(fakeRow);
+		lightboxBG.appendChild(fakeTable);
 		return lightboxBG;
 	}
 	function showLightbox(photoIndex) {
 		var featuredImage = createLightboxImage(photoIndex);
-		lightboxBG.appendChild(featuredImage);
+		clearLightbox();
+		setMaxHeight(displayPhoto, win.innerHeight);
+		fakeCell.appendChild(featuredImage);
 		document.body.appendChild(lightboxBG);
 		setTimeout(function() {
 			lightboxBG.className = "lightbox-bg show";
@@ -57,11 +76,20 @@
 		featuredPhoto.alt = photoObject.title;
 		featuredPhoto.src = photoObject.url;
 		featuredPhoto.id = featuredPhoto.className = "featured-photo";
+		displayPhoto = featuredPhoto;
 		photoFrame.className = "photo-frame";
 		captionHolder.appendChild(caption);
 		photoFrame.appendChild(featuredPhoto);
 		photoFrame.appendChild(captionHolder);
 		return photoFrame;
+	}
+	function setMaxHeight(image, windowHeight) {
+		image.style.maxHeight = ((windowHeight - 30) + "px");
+	}
+	window.onresize = function() {
+		if(displayPhoto) {
+			setMaxHeight(displayPhoto, win.innerHeight);
+		}
 	}
 
 	// load initial llama pictures
@@ -87,8 +115,8 @@
 
 	// construct image frames
 	function buildPhotoUrl(photo, thumbnail) {
-		var sizeCharacter = thumbnail ? "_q" : "";
-		var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + sizeCharacter + ".jpg";
+		var sizeCharacter = thumbnail ? "q" : "c";
+		var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_" + sizeCharacter + ".jpg";
 		return url;
 	}
 	function buildPhoto(photo, index) {
