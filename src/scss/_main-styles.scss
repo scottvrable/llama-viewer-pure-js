@@ -227,21 +227,23 @@ header {
 	.close-button,
 	.back-button,
 	.forward-button {
+		background-color: rgba(0,0,0, 0.4);
 		background-image: url(../img/button-sprite.png);
 		background-repeat: no-repeat;
 		background-size: 132px 44px;
 		cursor: pointer;
+		height: 44px;
 		opacity: 0.7;
 		position: fixed;
 		transition: all 0.2s;
 		width: 44px;
 		z-index: 100;
+		@include rounded(4px);
 		&:hover {
 			opacity: 1;
 		}
 	}
 	.close-button {
-		height: 44px;
 		top: 10px;
 		right: 10px;
 		@media #{$media-large} {
@@ -250,19 +252,17 @@ header {
 		}
 	}
 	.back-button {
-		background-position: -44px center;
-		height: 200px;				
+		background-position: -44px center;				
 		left: 10px;
-		margin-top: -100px;
+		margin-top: -22px;
 		top: 50%;
 		@media #{$media-large} {
 			left: 10%;
 		}
 	}
 	.forward-button {
-		background-position: -88px center;
-		height: 200px;		
-		margin-top: -100px;
+		background-position: -88px center;		
+		margin-top: -22px;
 		right: 10px;
 		top: 50%;
 		@media #{$media-large} {
