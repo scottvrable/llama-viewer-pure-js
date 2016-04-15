@@ -60,7 +60,7 @@
 	function showLightbox(photoIndex) {
 		var featuredImage = createLightboxImage(photoIndex);
 		clearLightbox();
-		setMaxHeight(displayPhoto, win.innerHeight);
+		setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
 		fakeCell.appendChild(featuredImage);
 		document.body.appendChild(lightboxBG);
 		setTimeout(function() {
@@ -83,12 +83,13 @@
 		photoFrame.appendChild(captionHolder);
 		return photoFrame;
 	}
-	function setMaxHeight(image, windowHeight) {
+	function setMaxSize(image, windowHeight, windowWidth) {
 		image.style.maxHeight = ((windowHeight - 30) + "px");
+		image.style.maxWidth = ((windowWidth - 30) + "px");
 	}
 	window.onresize = function() {
 		if(displayPhoto) {
-			setMaxHeight(displayPhoto, win.innerHeight);
+			setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
 		}
 	}
 
