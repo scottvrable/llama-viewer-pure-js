@@ -3,11 +3,11 @@
 	document.documentElement.className = "js";
 
 	// creating some elements
-	var Loader         = createLoader(),
-	    selectedAnimal = "llama",
-	    bigPhotoList   = null,
-	    lightboxBG     = createLightboxFrame()
-	    displayPhoto   = null;
+	var Loader           = createLoader(),
+	    selectedAnimal   = "llama",
+	    bigPhotoList     = null,
+	    lightboxBG       = createLightboxFrame()
+	    displayPhoto     = new Image();
 
 	// grabbing some elements
 	var win   			  = window,
@@ -45,10 +45,7 @@
 	}
 
 	function clearLightbox() {
-		if(document.querySelector("#featured-photo")) {
-			photoFrame.removeChild(featuredPhoto);
-		}
-		captionHolder.innerHTML = "";
+		photoFrame.removeChild(displayPhoto);
 	}
 
 	function createLightboxFrame() {
@@ -81,10 +78,13 @@
 		lightboxBG.appendChild(closeButton);
 		lightboxBG.appendChild(backButton);
 		lightboxBG.appendChild(forwardButton);
+		closeButton.addEventListener("click", function() {
+			document.body.removeChild(lightboxBG);
+			clearLightbox();
+		});
 		return lightboxBG;
 	}
 	function showLightbox(photoIndex) {
-		clearLightbox();
 		var featuredImage = createLightboxImage(photoIndex);
 		setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
 		fakeCell.appendChild(photoFrame);
