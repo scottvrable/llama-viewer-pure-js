@@ -194,7 +194,7 @@
 			this.parentNode.addEventListener("click", function() {
 				showLightbox(image.getAttribute("data-index"));
 			});
-			image.removeEventListener("load", fadeInImage);
+			// image.removeEventListener("load", fadeInImage);
 		}
 		image.addEventListener("load", fadeInImage);
 	}
