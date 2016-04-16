@@ -183,7 +183,6 @@
 			if(document.readyState === "interactive") {
 				var flickrQuery = new Flickr("llama", currentPage);
 				attachAnimalListItemFuncs();
-				console.log("Current page number: ", currentPage);
 			}
 		}
 	}
@@ -236,7 +235,6 @@
 	function selectRandomNum(topNum) {
 		var newNum = Math.ceil(Math.random() * topNum);
 		if(newNum === currentPage) {
-			console.log("Whoops!");
 			return selectRandomNum(topNum);
 		} else {
 			return newNum;
@@ -264,7 +262,6 @@
 		for(var i = 0; i < animalListItems.length; i++) {
 			animalListItems[i].addEventListener("click", function(e) {
 				e.stopPropagation();
-				console.log(this.id);
 				propagateNewAnimal(this.id);
 				hideAnimalList();
 			});
@@ -288,9 +285,7 @@
 	showMoreBtn.addEventListener("click", function() {
 		var numOfPages    = Number(showMoreBtn.getAttribute("data-pages"));
 		var randomPageNum = (numOfPages > 1) ? selectRandomNum(showMoreBtn.getAttribute("data-pages")) : 1;
-		console.log("current page num: ", currentPage);
 		currentPage       = randomPageNum;
-		console.log("random page num: ", randomPageNum);
 		var flickrQuery   = new Flickr(selectedAnimal, randomPageNum);
 	});
 
@@ -328,7 +323,6 @@
 		},
 		getPhotos: function(data) {
 			if(data.stat === "ok") {
-				console.log(data);
 				var photoWrapper = data.photos;
 				buildGallery(photoWrapper.photo);
 				showMoreBtn.setAttribute("data-pages", photoWrapper.pages < 40 ? photoWrapper.page : 40);
@@ -338,7 +332,6 @@
 				errorPara.parentNode.className = "warning show";
 			}
 			removeLoader();
-			console.log(bigPhotoList);
 		}
 	};
 
