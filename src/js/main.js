@@ -279,6 +279,9 @@
 		document.getElementById(animal).className = "hidden";
 		featAnimal1.innerHTML = animal;
 		featAnimal2.innerHTML = document.getElementById(animal).innerHTML;
+		currentPage = 1;
+		selectedAnimal = animal;
+		var flickrQuery = new Flickr(animal, currentPage);
 	}
 
 	// show more button functionality
