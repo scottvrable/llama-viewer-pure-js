@@ -65,12 +65,19 @@ header {
 			vertical-align: middle;
 		}
 	}
-	.show-more-container {
-		font-size: 1rem;
+	nav {
 		margin-top: 15px;
+		@media #{$media-large} {
+			margin-top: 4px;
+			float: right;
+		}
+	}
+	.show-more-container,
+	.diff-animals-container {
+		font-size: 1rem;
 		text-align: center;
 		@media #{$media-large} {
-			float: right;
+			float: left;
 		}
 		button {
 			background: $action-color;
@@ -80,6 +87,7 @@ header {
 			outline: 0;
 			padding: 0.6em 0.8em;
 			transition: all 0.2s;
+			width: 240px;
 			@include rounded(4px);
 			@include stylized-shadow(darken($action-color, 20%), 3px);
 			&:hover {
@@ -93,14 +101,42 @@ header {
 				@include stylized-shadow(darken($disabled-color, 20%), 3px);
 			}
 			@media #{$media-large} {
-				margin-top: 4px;
+				width: auto;
+			}
+		}
+	}
+	.diff-animals-container {
+		margin-bottom: 15px;
+		button {
+			background: $warning-color;
+			padding-right: 26px;
+			position: relative;
+			@include stylized-shadow(darken($warning-color, 20%), 3px);
+			&:hover {
+				background: darken($warning-color, 20%);
+				@include stylized-shadow(darken($warning-color, 30%), 3px);
+			}
+		}
+		.down-arrow {
+			border: solid 4px transparent;
+			border-top-color: #fff;
+			position: absolute;
+			right: 10px;
+			top: 48%;
+		}
+		@media #{$media-large} {
+			margin-bottom: 0;
+			button {
+				margin-right: 15px;
 			}
 		}
 	}
 	.heading-container,
-	.show-more-container {
+	.show-more-container,
+	.diff-animals-container {
 		@media #{$media-large} {
 			display: inline-block;
+			margin-bottom: 0;
 			margin-top: 0;
 			vertical-align: middle;
 		}
@@ -201,6 +237,7 @@ header {
 			background: rgba(255,255,255, 0.6);
 			bottom: 0;
 			color: #000;
+			font-family: $body-font;
 			font-size: 14px;
 			left: 0;
 			margin: 0;
