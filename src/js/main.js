@@ -105,8 +105,24 @@
 		displayPhoto.id  	= displayPhoto.className = "featured-photo";
 		photoFrame.appendChild(displayPhoto);
 		captionHolder.appendChild(caption);
+		setNavArrowValues(photoIndex);
 		fadeInDisplayImage(displayPhoto);
 		return displayPhoto;
+	}
+	function setNavArrowValues(photoIndex) {
+		var backButtonIndex, forwardButtonIndex;
+		if(photoIndex === "0") {
+			backButtonIndex = bigPhotoList.length;
+		} else {
+			backButtonIndex = Number(photoIndex) - 1;
+		}
+		if(photoIndex === bigPhotoList.length) {
+			forwardButtonIndex = "0";
+		} else {
+			forwardButtonIndex = Number(photoIndex) + 1;
+		}
+		backButton.setAttribute("data-index", backButtonIndex);
+		forwardButton.setAttribute("data-index", forwardButtonIndex);
 	}
 	function setMaxSize(image, windowHeight, windowWidth) {
 		image.style.maxHeight = ((windowHeight - 30) + "px");
