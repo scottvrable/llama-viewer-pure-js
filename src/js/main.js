@@ -12,17 +12,20 @@
 	    animalListVis    = false;
 
 	// grabbing some elements
-	var win   			   = window,
-			diffAnimalsBtn = document.getElementById("diff-animals"),
-			animalList     = document.getElementById("animal-list"),
-			showMoreBtn    = document.getElementById("show-more"),
-	  	imageDisplay   = document.getElementById("image-display"),
-	   	fakeCell       = lightboxBG.querySelector("#fake-cell"),
-	   	photoFrame     = lightboxBG.querySelector("#photo-frame"),
-	   	captionHolder  = lightboxBG.querySelector("h2"),
-	   	closeButton    = lightboxBG.querySelector("#close-button"),
-	   	backButton     = lightboxBG.querySelector("#back-button"),
-	   	forwardButton  = lightboxBG.querySelector("#forward-button");
+	var win   			    = window,
+			diffAnimalsBtn  = document.getElementById("diff-animals"),
+			animalList      = document.getElementById("animal-list"),
+			animalListItems = document.querySelectorAll("#animal-list li"),
+			showMoreBtn     = document.getElementById("show-more"),
+	  	imageDisplay    = document.getElementById("image-display"),
+	  	featAnimal1     = document.getElementById("featured-animal-1"),
+	  	featAnimal2     = document.getElementById("featured-animal-2"),
+	   	fakeCell        = lightboxBG.querySelector("#fake-cell"),
+	   	photoFrame      = lightboxBG.querySelector("#photo-frame"),
+	   	captionHolder   = lightboxBG.querySelector("h2"),
+	   	closeButton     = lightboxBG.querySelector("#close-button"),
+	   	backButton      = lightboxBG.querySelector("#back-button"),
+	   	forwardButton   = lightboxBG.querySelector("#forward-button");
 
 	// set up loading graphic
 	function createLoader() {
@@ -179,6 +182,7 @@
 		document.onreadystatechange = function() {
 			if(document.readyState === "interactive") {
 				var flickrQuery = new Flickr("llama", currentPage);
+				attachAnimalListItemFuncs();
 				console.log("Current page number: ", currentPage);
 			}
 		}
@@ -254,6 +258,28 @@
 			hideAnimalList();
 		}
 	});
+
+	// animal list functionality
+	function attachAnimalListItemFuncs() {
+		for(var i = 0; i < animalListItems.length; i++) {
+			animalListItems[i].addEventListener("click", function(e) {
+				e.stopPropagation();
+				console.log(this.id);
+				propagateNewAnimal(this.id);
+				hideAnimalList();
+			});
+		}
+	}
+	function propagateNewAnimal(animal) {
+		for(var a in animalListItems) {
+			if(animalListItems[a].className === "hidden") {
+				animalListItems[a].className = "";
+			}
+		}
+		document.getElementById(animal).className = "hidden";
+		featAnimal1.innerHTML = animal;
+		featAnimal2.innerHTML = document.getElementById(animal).innerHTML;
+	}
 
 	// show more button functionality
 	showMoreBtn.addEventListener("click", function() {
