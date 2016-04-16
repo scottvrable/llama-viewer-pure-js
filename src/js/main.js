@@ -8,18 +8,21 @@
 	    bigPhotoList     = null,
 	    lightboxBG       = createLightboxFrame()
 	    displayPhoto     = new Image(),
-	    currentPage      = 1;
+	    currentPage      = 1,
+	    animalListVis    = false;
 
 	// grabbing some elements
-	var win   			  = window,
-			showMoreBtn   = document.getElementById("show-more"),
-	  	imageDisplay  = document.getElementById("image-display"),
-	   	fakeCell      = lightboxBG.querySelector("#fake-cell"),
-	   	photoFrame    = lightboxBG.querySelector("#photo-frame"),
-	   	captionHolder = lightboxBG.querySelector("h2"),
-	   	closeButton   = lightboxBG.querySelector("#close-button"),
-	   	backButton    = lightboxBG.querySelector("#back-button"),
-	   	forwardButton = lightboxBG.querySelector("#forward-button");
+	var win   			   = window,
+			diffAnimalsBtn = document.getElementById("diff-animals"),
+			animalList     = document.getElementById("animal-list"),
+			showMoreBtn    = document.getElementById("show-more"),
+	  	imageDisplay   = document.getElementById("image-display"),
+	   	fakeCell       = lightboxBG.querySelector("#fake-cell"),
+	   	photoFrame     = lightboxBG.querySelector("#photo-frame"),
+	   	captionHolder  = lightboxBG.querySelector("h2"),
+	   	closeButton    = lightboxBG.querySelector("#close-button"),
+	   	backButton     = lightboxBG.querySelector("#back-button"),
+	   	forwardButton  = lightboxBG.querySelector("#forward-button");
 
 	// set up loading graphic
 	function createLoader() {
@@ -35,14 +38,26 @@
 
 	// show or hide Loader functions
 	function showLoader() {
+		diffAnimalsBtn.setAttribute("disabled", "true");
 		showMoreBtn.setAttribute("disabled", "true");
 		document.body.appendChild(Loader);
 	}
 	function removeLoader() {
 		if(document.getElementById("loading-bg")) {
 			document.body.removeChild(Loader);
+			diffAnimalsBtn.removeAttribute("disabled");
 			showMoreBtn.removeAttribute("disabled");
 		}
+	}
+
+	// show or hide animal list
+	function showAnimalList() {
+		animalList.className = "animal-list";
+		animalListVis = true;
+	}
+	function hideAnimalList() {
+		animalList.className = "animal-list hidden";
+		animalListVis = false;
 	}
 
 	function clearLightbox() {
@@ -224,8 +239,24 @@
 		}
 	}
 
+	// different animal button functionality
+	diffAnimalsBtn.addEventListener("click", function(e) {
+		if(animalListVis) {
+			e.stopPropagation();
+			hideAnimalList();
+		} else {
+			e.stopPropagation();
+			showAnimalList();
+		}
+	});
+	document.body.addEventListener("click", function(e) {
+		if(animalListVis) {
+			hideAnimalList();
+		}
+	});
+
 	// show more button functionality
-	showMoreBtn.addEventListener("click", function(e) {
+	showMoreBtn.addEventListener("click", function() {
 		var numOfPages    = Number(showMoreBtn.getAttribute("data-pages"));
 		var randomPageNum = (numOfPages > 1) ? selectRandomNum(showMoreBtn.getAttribute("data-pages")) : 1;
 		console.log("current page num: ", currentPage);

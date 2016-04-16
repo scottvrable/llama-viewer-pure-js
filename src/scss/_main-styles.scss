@@ -67,6 +67,7 @@ header {
 	}
 	nav {
 		margin-top: 15px;
+		text-align: center;
 		@media #{$media-large} {
 			margin-top: 4px;
 			float: right;
@@ -106,7 +107,9 @@ header {
 		}
 	}
 	.diff-animals-container {
+		display: inline-block;
 		margin-bottom: 15px;
+		position: relative;
 		button {
 			background: $warning-color;
 			padding-right: 26px;
@@ -116,18 +119,51 @@ header {
 				background: darken($warning-color, 20%);
 				@include stylized-shadow(darken($warning-color, 30%), 3px);
 			}
+			.down-arrow {
+				border: solid 4px transparent;
+				border-top-color: #fff;
+				position: absolute;
+				right: 10px;
+				top: 48%;
+			}
 		}
-		.down-arrow {
-			border: solid 4px transparent;
-			border-top-color: #fff;
+		.animal-list {
+			background: #fff;
+			box-shadow: 0 0 10px rgba(0,0,0, 0.4);
+			list-style-type: none;
+			margin: 3px 0 0;
 			position: absolute;
-			right: 10px;
-			top: 48%;
+			padding: 4px 0 5px;
+			right: 0;
+			width: 180px;
+			z-index: 1000;
+			@include rounded(4px);
+			li {
+				cursor: pointer;
+				line-height: 30px;
+				padding: 0 15px;
+				text-align: left;
+				transition: all 0.3s;
+				&:hover {
+					background: $action-color;
+					color: #fff;
+				}
+			}
+			.up-arrow {
+				border: transparent 10px solid;
+				border-bottom-color: #fff;
+				position: absolute;
+				right: 4px;
+				top: -18px;
+			}
 		}
 		@media #{$media-large} {
 			margin-bottom: 0;
 			button {
 				margin-right: 15px;
+			}
+			.animal-list {
+				right: 15px;
 			}
 		}
 	}

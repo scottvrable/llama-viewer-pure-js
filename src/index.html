@@ -19,9 +19,20 @@
 				</div>
 				<nav>
 					<div class="diff-animals-container">
-						<button id="diff-animals" autocomplete="off">
-							Show Me Something Different <span class="down-arrow"></span>
+						<button id="diff-animals" autocomplete="off" disabled="true">
+							<span id="text">Show Me Something Different</span> <span class="down-arrow"></span>
 						</button>
+						<ul id="animal-list" class="animal-list hidden">
+							<li id="llama" class="hidden">Llamas</li>
+							<li id="cow">Cows</li>
+							<li id="pig">Pigs</li>
+							<li id="horse">Horses</li>
+							<li id="chicken">Chickens</li>
+							<li id="goat">Goats</li>
+							<li id="sheep">Sheep</li>
+							<li id="donkey">Donkeys</li>
+							<span class="up-arrow"></span>
+						</ul>
 					</div>
 					<div class="show-more-container">
 						<button id="show-more" autocomplete="off" disabled="true">
