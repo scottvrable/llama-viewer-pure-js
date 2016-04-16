@@ -7,7 +7,8 @@
 	    selectedAnimal   = "llama",
 	    bigPhotoList     = null,
 	    lightboxBG       = createLightboxFrame()
-	    displayPhoto     = new Image();
+	    displayPhoto     = new Image(),
+	    currentPage      = 1;
 
 	// grabbing some elements
 	var win   			  = window,
@@ -83,6 +84,11 @@
 			document.body.removeChild(lightboxBG);
 			clearLightbox();
 		});
+		backButton.addEventListener("click", function() {
+			var backIndex = this.getAttribute("data-index");
+			removeOldImage();
+			createLightboxImage(backIndex);
+		});
 		forwardButton.addEventListener("click", function() {
 			var forwardIndex = this.getAttribute("data-index");
 			removeOldImage();
@@ -122,7 +128,7 @@
 	function setNavArrowValues(photoIndex) {
 		var backButtonIndex, forwardButtonIndex;
 		if(photoIndex === "0") {
-			backButtonIndex = bigPhotoList.length;
+			backButtonIndex = Number(bigPhotoList.length - 1);
 		} else {
 			backButtonIndex = Number(photoIndex) - 1;
 		}
@@ -156,7 +162,8 @@
 	function initialPageLoad() {
 		document.onreadystatechange = function() {
 			if(document.readyState === "interactive") {
-				var flickrQuery = new Flickr("llama", 1);
+				var flickrQuery = new Flickr("llama", currentPage);
+				console.log("Current page number: ", currentPage);
 			}
 		}
 	}
@@ -207,14 +214,23 @@
 	}
 
 	function selectRandomNum(topNum) {
-		return Math.ceil(Math.random() * topNum);
+		var newNum = Math.ceil(Math.random() * topNum);
+		if(newNum === currentPage) {
+			console.log("Whoops!");
+			return selectRandomNum(topNum);
+		} else {
+			return newNum;
+		}
 	}
 
 	// show more button functionality
 	showMoreBtn.addEventListener("click", function(e) {
-		var numOfPages = Number(showMoreBtn.getAttribute("data-pages"));
+		var numOfPages    = Number(showMoreBtn.getAttribute("data-pages"));
 		var randomPageNum = (numOfPages > 1) ? selectRandomNum(showMoreBtn.getAttribute("data-pages")) : 1;
-		var flickrQuery = new Flickr(selectedAnimal, randomPageNum);
+		console.log("current page num: ", currentPage);
+		currentPage       = randomPageNum;
+		console.log("random page num: ", randomPageNum);
+		var flickrQuery   = new Flickr(selectedAnimal, randomPageNum);
 	});
 
 	// Flickr query setup
