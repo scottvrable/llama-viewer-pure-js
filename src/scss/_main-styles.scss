@@ -179,6 +179,7 @@ header {
 	}
 }
 .viewing-area {
+	min-height: 750px;
 	.image-display {
 		padding: 20px;
 		ul {
@@ -341,6 +342,24 @@ header {
 		top: 50%;
 		@media #{$media-large} {
 			right: 10%;
+		}
+	}
+}
+footer {
+	border-top: solid 1px $soft-color;
+	margin-top: 30px;
+	padding: 40px 20px;
+	p {
+		color: #404040;
+		font-size: 0.8rem;
+		margin: 0;
+		text-align: center;
+		a {
+			color: $warning-color;
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 }
