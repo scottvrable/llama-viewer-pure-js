@@ -133,7 +133,6 @@
 		var photoObject         = bigPhotoList[photoIndex];
 		photoObject.title       = photoObject.title || "Untitled";
 		displayPhoto.alt 	      = photoObject.title;
-		displayPhoto.src 	      = photoObject.url;
 		displayPhoto.id  	      = displayPhoto.className = "featured-photo";
 		photoFrame.appendChild(displayPhoto);
 		setNavArrowValues(photoIndex);
@@ -167,6 +166,7 @@
 			removeLoader();
 		}
 		image.addEventListener("load", fadeIn);
+		image.src = photoObject.url;
 	}
 	function setCaption(photoObject) {
 		captionHolder.innerHTML = photoObject.title;
