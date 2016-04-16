@@ -113,16 +113,13 @@
 	}
 	function createLightboxImage(photoIndex) {
 		var photoObject         = bigPhotoList[photoIndex];
-		var caption             = document.createTextNode(photoObject.title);
 		photoObject.title       = photoObject.title || "Untitled";
 		displayPhoto.alt 	      = photoObject.title;
 		displayPhoto.src 	      = photoObject.url;
 		displayPhoto.id  	      = displayPhoto.className = "featured-photo";
 		photoFrame.appendChild(displayPhoto);
-		captionHolder.innerHTML = "";
-		captionHolder.appendChild(caption);
 		setNavArrowValues(photoIndex);
-		fadeInDisplayImage(displayPhoto);
+		fadeInDisplayImage(displayPhoto, photoObject);
 		return displayPhoto;
 	}
 	function setNavArrowValues(photoIndex) {
@@ -144,13 +141,17 @@
 		image.style.maxHeight = ((windowHeight - 30) + "px");
 		image.style.maxWidth  = ((windowWidth - 30) + "px");
 	}
-	function fadeInDisplayImage(image) {
+	function fadeInDisplayImage(image, photoObject) {
 		var fadeIn = function() {
 			this.parentNode.className = "photo-frame show";
 			image.removeEventListener("load", fadeIn);
+			setCaption(photoObject);
 			removeLoader();
 		}
 		image.addEventListener("load", fadeIn);
+	}
+	function setCaption(photoObject) {
+		captionHolder.innerHTML = photoObject.title;
 	}
 	window.onresize = function() {
 		if(displayPhoto) {
