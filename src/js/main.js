@@ -81,12 +81,21 @@
 		lightboxBG.appendChild(forwardButton);
 		closeButton.addEventListener("click", function() {
 			document.body.removeChild(lightboxBG);
-			photoFrame.className = "photo-frame";
 			clearLightbox();
+		});
+		forwardButton.addEventListener("click", function() {
+			var forwardIndex = this.getAttribute("data-index");
+			removeOldImage();
+			createLightboxImage(forwardIndex);
 		});
 		return lightboxBG;
 	}
+	function removeOldImage() {
+		photoFrame.className = "photo-frame";
+		showLoader();
+	}
 	function showLightbox(photoIndex) {
+		removeOldImage();
 		displayPhoto = createLightboxImage(photoIndex);
 		setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
 		fakeCell.appendChild(photoFrame);
@@ -97,13 +106,14 @@
 		showLoader();
 	}
 	function createLightboxImage(photoIndex) {
-		var photoObject   = bigPhotoList[photoIndex];
-		photoObject.title = photoObject.title || "Untitled";
-		var caption       = document.createTextNode(photoObject.title);
-		displayPhoto.alt 	= photoObject.title;
-		displayPhoto.src 	= photoObject.url;
-		displayPhoto.id  	= displayPhoto.className = "featured-photo";
+		var photoObject         = bigPhotoList[photoIndex];
+		var caption             = document.createTextNode(photoObject.title);
+		photoObject.title       = photoObject.title || "Untitled";
+		displayPhoto.alt 	      = photoObject.title;
+		displayPhoto.src 	      = photoObject.url;
+		displayPhoto.id  	      = displayPhoto.className = "featured-photo";
 		photoFrame.appendChild(displayPhoto);
+		captionHolder.innerHTML = "";
 		captionHolder.appendChild(caption);
 		setNavArrowValues(photoIndex);
 		fadeInDisplayImage(displayPhoto);
@@ -116,7 +126,7 @@
 		} else {
 			backButtonIndex = Number(photoIndex) - 1;
 		}
-		if(photoIndex === bigPhotoList.length) {
+		if(photoIndex === String(bigPhotoList.length - 1)) {
 			forwardButtonIndex = "0";
 		} else {
 			forwardButtonIndex = Number(photoIndex) + 1;
