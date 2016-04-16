@@ -46,6 +46,7 @@
 
 	function clearLightbox() {
 		photoFrame.removeChild(displayPhoto);
+		captionHolder.innerHTML = "";
 	}
 
 	function createLightboxFrame() {
@@ -97,10 +98,11 @@
 	}
 	function createLightboxImage(photoIndex) {
 		var photoObject   = bigPhotoList[photoIndex];
+		photoObject.title = photoObject.title || "Untitled";
 		var caption       = document.createTextNode(photoObject.title);
-		displayPhoto.alt = photoObject.title;
-		displayPhoto.src = photoObject.url;
-		displayPhoto.id  = displayPhoto.className = "featured-photo";
+		displayPhoto.alt 	= photoObject.title;
+		displayPhoto.src 	= photoObject.url;
+		displayPhoto.id  	= displayPhoto.className = "featured-photo";
 		photoFrame.appendChild(displayPhoto);
 		captionHolder.appendChild(caption);
 		fadeInDisplayImage(displayPhoto);
