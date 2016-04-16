@@ -120,6 +120,7 @@
 	}
 	function showLightbox(photoIndex) {
 		removeOldImage();
+		displayPhoto.src = ""; // fix for IE
 		displayPhoto = createLightboxImage(photoIndex);
 		setMaxSize(displayPhoto, win.innerHeight, win.innerWidth);
 		fakeCell.appendChild(photoFrame);
