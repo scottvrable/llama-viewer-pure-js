@@ -1,6 +1,7 @@
 "use strict";
 
 var gulp 		     = require("gulp"),
+    webserver    = require("gulp-webserver"),
     autoprefixer = require("gulp-autoprefixer"),
     uglify       = require("gulp-uglify"),
     sourcemaps   = require("gulp-sourcemaps"),
@@ -40,4 +41,9 @@ gulp.task("default", ["clean"], function() {
 	gulp.watch("src/*.html", ["html-min"]);
 	gulp.watch("src/**/*.scss", ["sass"]);
 	gulp.watch("src/**/*.js", ["uglify"]);
+});
+
+gulp.task("webserver", function() {
+  gulp.src("build")
+    .pipe(webserver());
 });
