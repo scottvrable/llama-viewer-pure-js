@@ -1,6 +1,7 @@
 .sass-cache/
 *.css.map
 build
+node_modules
 
 # OS generated files #
 .DS_Store
