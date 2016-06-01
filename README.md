@@ -16,3 +16,36 @@ If you grow bored of llamas, you can click this button to see other farm animals
 #### Final Notes
 
 This application was built with HTML, CSS (using compiled Sass), and vanilla JavaScript. I used Gulp for preprocessing, including CSS prefix appending, Sass compiling, concatenation and minification. No jQuery or any other JavaScript libraries were used. No Bootstrap. The source files are in the **src** directory and the minified output files are in the **build** directory. It has been tested and should reliably work in all the newest versions of Chrome, Firefox, Safari and Internet Explorer.
+
+#### Local Development
+
+If you want to pull the source code down from GitHub and make some changes, by all means, do! And submit a pull request!
+
+```
+	> git clone https://github.com/scottvrable/llama-viewer-pure-js.git
+	> cd llama-viewer-pure-js
+	> npm install --save gulp gulp-webserver gulp-autoprefixer gulp-uglify gulp-sourcemaps gulp-concat gulp-sass gulp-htmlmin del
+	> gulp  
+``` 
+
+This will install all your dependencies and build the application. Leave this running in your terminal and open up another terminal window. In the same directory:
+
+```
+	> gulp webserver
+```
+
+This will launch `gulp-webserver`. To view the live site, navigate to `localhost:8000`.
+
+If you would like to run `livereload` while you're working, go into `Gulpfile.js` and change
+
+```
+	.pipe(webserver());
+```
+
+to
+
+```
+	.pipe(webserver({livereload: true}));
+```
+
+You may need stop the server with `ctrl-c` and restart it.
