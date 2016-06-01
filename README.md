@@ -13,10 +13,6 @@ Clicking on this button will choose a random number between 1 and 40 (fewer than
 
 If you grow bored of llamas, you can click this button to see other farm animals. The currently selected animal will not appear in the list. Once you choose a new animal, a new query will be sent to Flickr that pulls in the first 24 images of that animal. The title of the page will now change from "The Amazing LLAMA Viewer!" to, for example, "The Amazing CHICKEN Viewer!" The "Show Me More Button" will now say, "Show Me More Chickens!"
 
-#### Final Notes
-
-This application was built with HTML, CSS (using compiled Sass), and vanilla JavaScript. I used Gulp for preprocessing, including CSS prefix appending, Sass compiling, concatenation and minification. No jQuery or any other JavaScript libraries were used. No Bootstrap. The source files are in the **src** directory and the minified output files are in the **build** directory. It has been tested and should reliably work in all the newest versions of Chrome, Firefox, Safari and Internet Explorer.
-
 #### Local Development
 
 If you want to pull the source code down from GitHub and make some changes, by all means, do! And submit a pull request!
@@ -49,3 +45,7 @@ to
 ```
 
 You may need stop the server with `ctrl-c` and restart it.
+
+#### Final Notes
+
+This application was built with HTML, CSS (using compiled Sass), and vanilla JavaScript. I used Gulp for preprocessing, including CSS prefix appending, Sass compiling, concatenation and minification. No jQuery or any other JavaScript libraries were used. No Bootstrap. The source files are in the **src** directory and the minified output files are in the **build** directory. It has been tested and should reliably work in all the newest versions of Chrome, Firefox, Safari and Internet Explorer.
