@@ -3,7 +3,7 @@
 	document.documentElement.className = "js";
 
 	// creating some elements
-	var Loader           = createLoader(),
+	var loader           = createLoader(),
 	    selectedAnimal   = "llama",
 	    bigPhotoList     = null,
 	    lightboxBG       = createLightboxFrame()
@@ -43,11 +43,11 @@
 	function showLoader() {
 		diffAnimalsBtn.setAttribute("disabled", "true");
 		showMoreBtn.setAttribute("disabled", "true");
-		document.body.appendChild(Loader);
+		document.body.appendChild(loader);
 	}
 	function removeLoader() {
 		if(document.getElementById("loading-bg")) {
-			document.body.removeChild(Loader);
+			document.body.removeChild(loader);
 			diffAnimalsBtn.removeAttribute("disabled");
 			showMoreBtn.removeAttribute("disabled");
 		}
