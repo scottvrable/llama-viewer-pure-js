@@ -1,6 +1,6 @@
 "use strict";
 
-var gulp         = require("gulp"),
+var	gulp         = require("gulp"),
 		webserver    = require("gulp-webserver"),
 		autoprefixer = require("gulp-autoprefixer"),
 		uglify       = require("gulp-uglify"),

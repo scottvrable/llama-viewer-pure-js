@@ -3,7 +3,7 @@
 	document.documentElement.className = "js";
 
 	// creating some elements
-	var loader           = createLoader(),
+	var	loader           = createLoader(),
 			selectedAnimal   = "llama",
 			bigPhotoList     = null,
 			lightboxBG       = createLightboxFrame(),
@@ -12,7 +12,7 @@
 			animalListVis    = false;
 
 	// grabbing some elements
-	var win   			    = window,
+	var	win   			    = window,
 			diffAnimalsBtn  = document.getElementById("diff-animals"),
 			animalList      = document.getElementById("animal-list"),
 			animalListItems = document.querySelectorAll("#animal-list li"),
