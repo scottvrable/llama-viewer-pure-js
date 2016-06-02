@@ -4,12 +4,12 @@
 
 	// creating some elements
 	var loader           = createLoader(),
-	    selectedAnimal   = "llama",
-	    bigPhotoList     = null,
-	    lightboxBG       = createLightboxFrame()
-	    displayPhoto     = new Image(),
-	    currentPage      = 1,
-	    animalListVis    = false;
+			selectedAnimal   = "llama",
+			bigPhotoList     = null,
+			lightboxBG       = createLightboxFrame(),
+			displayPhoto     = new Image(),
+			currentPage      = 1,
+			animalListVis    = false;
 
 	// grabbing some elements
 	var win   			    = window,
@@ -17,15 +17,15 @@
 			animalList      = document.getElementById("animal-list"),
 			animalListItems = document.querySelectorAll("#animal-list li"),
 			showMoreBtn     = document.getElementById("show-more"),
-	  	imageDisplay    = document.getElementById("image-display"),
-	  	featAnimal1     = document.getElementById("featured-animal-1"),
-	  	featAnimal2     = document.getElementById("featured-animal-2"),
-	   	fakeCell        = lightboxBG.querySelector("#fake-cell"),
-	   	photoFrame      = lightboxBG.querySelector("#photo-frame"),
-	   	captionHolder   = lightboxBG.querySelector("h2"),
-	   	closeButton     = lightboxBG.querySelector("#close-button"),
-	   	backButton      = lightboxBG.querySelector("#back-button"),
-	   	forwardButton   = lightboxBG.querySelector("#forward-button");
+			imageDisplay    = document.getElementById("image-display"),
+			featAnimal1     = document.getElementById("featured-animal-1"),
+			featAnimal2     = document.getElementById("featured-animal-2"),
+			fakeCell        = lightboxBG.querySelector("#fake-cell"),
+			photoFrame      = lightboxBG.querySelector("#photo-frame"),
+			captionHolder   = lightboxBG.querySelector("h2"),
+			closeButton     = lightboxBG.querySelector("#close-button"),
+			backButton      = lightboxBG.querySelector("#back-button"),
+			forwardButton   = lightboxBG.querySelector("#forward-button");
 
 	// set up loading graphic
 	function createLoader() {
