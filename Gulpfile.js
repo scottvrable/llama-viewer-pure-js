@@ -13,7 +13,7 @@ var gulp 		     = require("gulp"),
 gulp.task("html-min", function() {
   return gulp.src("src/*.html")
     .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest("build/"))
+    .pipe(gulp.dest("./"))
 });
 
 gulp.task("sass", function () {
@@ -23,17 +23,17 @@ gulp.task("sass", function () {
   .pipe(autoprefixer("last 10 versions"))
   .pipe(sourcemaps.write())
   .pipe(concat("main.css"))
-  .pipe(gulp.dest("build/css"));
+  .pipe(gulp.dest("css"));
 });
 
 gulp.task("uglify", function() {
   return gulp.src("src/js/*.js")
     .pipe(uglify({mangle: false}))
-    .pipe(gulp.dest("build/js"));
+    .pipe(gulp.dest("js"));
 });
 
 gulp.task("clean", function() {
-   return del(["build/*.html", "build/css", "build/js"]);
+   return del(["*.html", "css", "js"]);
 });
 
 gulp.task("default", ["clean"], function() {
@@ -44,6 +44,6 @@ gulp.task("default", ["clean"], function() {
 });
 
 gulp.task("webserver", function() {
-  gulp.src("build")
+  gulp.src("./")
     .pipe(webserver());
 });
