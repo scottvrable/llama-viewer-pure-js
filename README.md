@@ -1,4 +1,4 @@
-## [The Amazing Farm Animal Viewer](http://scottvrable.github.io/llama-viewer-pure-js/)
+## [The Amazing Farm Animal Viewer](http://vrab.us/llama-viewer)
 ### By [Scott Vrable](http://scottvrable.com) / Powered by [Flickr](http://flickr.com)
 
 It's random, but this mobile-first, responsive, single-page app pulls in pictures of various farm animals tagged on Flickr, specifically: **llamas**, **cows**, **chickens**, **horses**, **sheep**, **goats** and **donkeys**. Why farm animals? Because they're slightly more interesting than pictures of what people ordered at a restaurant.
