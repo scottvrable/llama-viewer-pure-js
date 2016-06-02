@@ -1,0 +1,39 @@
+{
+  "name": "llama-viewer-pure-js",
+  "version": "1.0.0",
+  "description": "A Flickr-powered llama (and other farm animals) picture viewer made with vanilla HTML, CSS and JavaScript.",
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "del": "^2.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-sass": "^2.3.1",
+    "gulp-webserver": "^0.9.1",
+    "gulp-uglify": "^1.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottvrable/llama-viewer-pure-js.git"
+  },
+  "keywords": [
+    "photo",
+    "viewer",
+    "flickr",
+    "api",
+    "javascript",
+    "llama"
+  ],
+  "author": "Scott Vrable",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scottvrable/llama-viewer-pure-js/issues"
+  },
+  "homepage": "https://github.com/scottvrable/llama-viewer-pure-js#readme"
+}
