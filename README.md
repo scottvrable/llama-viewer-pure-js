@@ -23,14 +23,21 @@ If you grow bored of llamas, you can click this button to see other farm animals
 
 If you want to pull the source code down from GitHub and make some changes, by all means, do! And submit a pull request!
 
+Clone the repo locally, navigate to the directory and install the necessary dependencies:
+
 ```
 	> git clone https://github.com/scottvrable/llama-viewer-pure-js.git
 	> cd llama-viewer-pure-js
-	> npm install --save gulp gulp-webserver gulp-autoprefixer gulp-uglify gulp-sourcemaps gulp-concat gulp-sass gulp-htmlmin del
-	> gulp  
-``` 
+	> npm install  
+```
 
-This will install all your dependencies and build the application. Leave this running in your terminal and open up another terminal window. In the same directory:
+Next, do the first build of the application by running Gulp:
+
+```
+	> gulp
+```
+
+Leave this running in your terminal and open up another terminal window. In the same directory:
 
 ```
 	> gulp webserver
